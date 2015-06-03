@@ -1,5 +1,21 @@
 Angular-pagination
 
+```javascript
+html:
+        &lt;li class="talk-music-pic"
+            ng-repeat="music in musicEmotion |
+            offset: currentPage*itemsPerPage |
+            limitTo: itemsPerPage"&gt; 分页分页分页&lt;/li&gt;
+
+        //指令接口
+        //currentPage: 当前页数-1
+        //itemsPerPage: ng-repeat 显示的列表数目
+        //itemsList: ng-repeat的数组(对象)
+        //pageList: 显示的页码数目
+        &lt;pagination currentPage="0" itemsPerPage="4"
+            itemsList="musicEmotion" pageList="2"&gt;&lt;/pagination&gt;
+
+js:
 angular.module('pagination.directives', []);
 
 music.directive('pagination', function (){
@@ -94,3 +110,4 @@ music.directive('pagination', function (){
         }
     }
 });
+```
