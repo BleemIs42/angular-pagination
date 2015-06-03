@@ -1,4 +1,4 @@
-#Angular-pagination(http://shafley.github.io/learn/pagination/)
+#[Angular-pagination](http://shafley.github.io/learn/pagination/)
 
 [Demo:shafley.github.io/learn/pagination/](http://shafley.github.io/learn/pagination/)
 ```javascript
