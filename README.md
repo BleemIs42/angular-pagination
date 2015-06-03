@@ -16,7 +16,7 @@ html:
         itemsList="musicEmotion" pageList="2"></pagination>
 
 js:
-    directive
+    //directive
     angular.module('pagination.directives', []);
 
     music.directive('pagination', function (){
@@ -113,7 +113,7 @@ js:
     });
 
 
-    filter
+    //filter
     angular.module('pagination.filters', []);
 
     music.filter('offset', function () {
