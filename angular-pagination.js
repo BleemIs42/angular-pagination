@@ -102,7 +102,6 @@ app.directive('pagination', function (){
                 <span ng-click="jumpEnd()">尾页</span> \
             </div>',
         link:function (scope, element, attrs){
-
             scope.currentPage = attrs.currentpage;
             scope.itemsPerPage = attrs.itemsperpage;
             scope.itemsList = attrs.itemslist;
