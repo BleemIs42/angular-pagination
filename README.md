@@ -2,8 +2,9 @@
 
 [Demo:shafley.github.io/learn/pagination/](http://shafley.github.io/learn/pagination/)
 
-###Install
+### Install
     npm install angular-pagination
+### How to use
 ```javascript
 html:
     <li class="talk-music-pic"
