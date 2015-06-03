@@ -13,6 +13,7 @@ html:
     //itemsPerPage: ng-repeat 显示的列表数目
     //itemsList: ng-repeat的数组(对象)
     //pageList: 显示的页码数目
+    //numactive: 当前页码数字的颜色
     <pagination currentPage="0" itemsPerPage="4"
     itemsList="musicEmotion" pageList="2"></pagination>
 
