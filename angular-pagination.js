@@ -1,84 +1,30 @@
 'use strict';
 var app = angular.module('app', [
     'app.controllers',
+    'app.services',
     'pagination.directives',
     'pagination.filters'
     ]);
+
+//Service
+angular.module('app.services', []);
+app.factory('list', ['$http', function($http) {
+    var service = {};
+    service.musiclist = function (){
+        return $http.get('list.json').then(function(resp){
+                return resp.data;
+            });
+    };
+    return service;
+}]);
+
 //Controllers
 angular.module('app.controllers', []);
-app.controller('AppCtrl', ['$scope', function ($scope){
-
-    $scope.musicEmotion = [
-        {
-            'num': '一',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '二',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '三',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '四',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '五',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '六',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '七',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '八',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '九',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '十',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '十一',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '十二',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '十三',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '十四',
-            'name': '红尘客栈'
-        }
-    ];
+app.controller('AppCtrl', ['$scope', 'list', function($scope, list) {
+    list.musiclist().then(function(data) {
+        $scope.musicEmotion = data;
+        $scope.$broadcast('musicEmotion');
+    });
 }]);
 
 //Directives
@@ -101,75 +47,81 @@ app.directive('pagination', function (){
                 <span ng-click="nextPage()" ng-disabled="nextPageDisabled()">下一页</span>\
                 <span ng-click="jumpEnd()">尾页</span> \
             </div>',
-        link:function (scope, element, attrs){
-            scope.currentPage = attrs.currentpage;
-            scope.itemsPerPage = attrs.itemsperpage;
-            scope.itemsList = attrs.itemslist;
-            scope.pageList = attrs.pagelist;
+        link: function(scope, element, attrs) {
+            scope.$on(attrs.itemslist, function() {
+                finish();
+            });
+            var finish = function() {
+                scope.currentPage = attrs.currentpage;
+                scope.itemsPerPage = attrs.itemsperpage;
+                scope.itemsList = scope[attrs.itemslist];
+                scope.pageList = attrs.pagelist;
+                // console.log(scope);
+                console.log(scope.itemsList.length);
 
-            scope.itemsList = scope.$eval(scope.itemsList);
+                scope.pageCount = function() {
+                    if (scope.itemsList) {
+                        console.log(Math.ceil(scope.itemsList.length / scope.itemsPerPage));
+                        return Math.ceil(scope.itemsList.length / scope.itemsPerPage);
+                    } else {
+                        return 1;
+                    }
+                };
+                // console.log(scope.itemsList);
+                scope.total = scope.pageCount();
+                scope.number = [];
+                for (var i = 0; i < scope.total; i++) {
+                    scope.number.push(i + 1);
+                };
 
-            scope.pageCount = function () {
-                if (scope.itemsList) {
-                    return Math.ceil(scope.itemsList.length / scope.itemsPerPage);
-                } else {
-                    return 1;
+                scope.currentNum = 0;
+                scope.jumpPageList = function() {
+                    scope.currentNum = parseInt(scope.currentPage / scope.pageList);
+                };
+
+                scope.jumpPage = function(num) {
+                    scope.currentPage = num - 1;
+                    scope.jumpPageList();
+                };
+
+                scope.jumpHead = function() {
+                    scope.currentPage = 0;
+                    scope.jumpPageList();
                 }
-            };
-            scope.total = scope.pageCount();
 
-            scope.number = [];
-            for(var i=0; i<scope.total; i++){
-                scope.number.push(i+1);
-            };
+                scope.jumpEnd = function() {
+                    scope.currentPage = scope.total - 1;
+                    scope.jumpPageList();
+                }
 
-            scope.currentNum = 0;
-            scope.jumpPageList = function (){
-                scope.currentNum = parseInt(scope.currentPage/scope.pageList);
-            };
+                scope.prevPage = function() {
+                    if (scope.prevPageDisabled()) {
+                        return;
+                    }
+                    if (scope.currentPage > 0) {
+                        scope.currentPage--;
+                    }
+                    scope.jumpPageList();
+                };
 
-            scope.jumpPage = function (num){
-                scope.currentPage = num -1;
-                scope.jumpPageList();
-            };
+                scope.prevPageDisabled = function() {
+                    return scope.currentPage + 1 == 1;
+                };
 
-            scope.jumpHead = function (){
-                scope.currentPage = 0;
-                scope.jumpPageList();
+                scope.nextPage = function() {
+                    if (scope.nextPageDisabled()) {
+                        return;
+                    }
+                    if (scope.currentPage < scope.pageCount()) {
+                        scope.currentPage++;
+                    }
+                    scope.jumpPageList();
+                };
+
+                scope.nextPageDisabled = function() {
+                    return (scope.currentPage + 1) == scope.total;
+                };
             }
-
-            scope.jumpEnd = function (){
-                scope.currentPage = scope.total-1;
-                scope.jumpPageList();
-            }
-
-            scope.prevPage = function () {
-                if(scope.prevPageDisabled()){
-                    return;
-                }
-                if (scope.currentPage > 0) {
-                    scope.currentPage--;
-                }
-                scope.jumpPageList();
-            };
-
-            scope.prevPageDisabled = function () {
-                return scope.currentPage +1 == 1;
-            };
-
-            scope.nextPage = function () {
-                if(scope.nextPageDisabled()){
-                    return;
-                }
-                if (scope.currentPage < scope.pageCount()) {
-                    scope.currentPage++;
-                }
-                scope.jumpPageList();
-            };
-
-            scope.nextPageDisabled = function () {
-                return (scope.currentPage +1) == scope.total;
-            };
         }
     }
 });
