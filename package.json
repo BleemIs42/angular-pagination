@@ -1,6 +1,6 @@
 {
   "name": "angular-pagination",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "this is a angular plugin for pagination",
   "main": "angular-pagination.js",
   "scripts": {

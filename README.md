@@ -12,89 +12,18 @@ html:
         offset: currentPage*itemsPerPage |
         limitTo: itemsPerPage">Pagination</li>;
 
-    //
-    //currentPage: The number of pages minus one
-    //itemsPerPage: items for ng-repeat
-    //itemsList: the object or array for ng-repeat
-    //pageList: the num of pagination length
-    //numactive: class for current page color
+    //currentPage: number      当前页码-1
+    //itemsPerPage: number     ng-repeat每页显示的list长度
+    //itemsList: object        ng-repeat渲染的对象
+    //pageList: number         分页显示的页码数字个数
+    //numactive: class         当前页页码的样式(背景颜色)
     <pagination currentPage="0" itemsPerPage="4"
     itemsList="musicEmotion" pageList="2"></pagination>
 
 js:
     app.controller('AppCtrl', ['$scope', function ($scope){
-    //use api data replace $scope.musicEmotion
-    $scope.musicEmotion = [
-        {
-            'num': '一',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '二',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '三',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '四',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '五',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '六',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '七',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '八',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '九',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '十',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '十一',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '十二',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '十三',
-            'name': '红尘客栈'
-        },
-
-        {
-            'num': '十四',
-            'name': '红尘客栈'
-        }
-    ];
+    //后台返回的数据替换 $scope.musicEmotion
+    $scope.musicEmotion = [{}, {}, {}, {}, {}, {}];
     $scope.$broadcast('musicEmotion');
 }]);
 ```
