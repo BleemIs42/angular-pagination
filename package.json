@@ -1,7 +1,7 @@
 {
   "name": "angular-pagination",
-  "version": "0.0.3",
-  "description": "this is a angular plugin for pagination",
+  "version": "0.0.4",
+  "description": "An angular plugin for pagination",
   "main": "angular-pagination.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

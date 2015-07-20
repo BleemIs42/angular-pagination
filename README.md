@@ -14,7 +14,7 @@ html:
 
     //currentPage: number      当前页码-1
     //itemsPerPage: number     ng-repeat每页显示的list长度
-    //itemsList: object        ng-repeat渲染的对象
+    //itemsList: array         ng-repeat渲染的数组
     //pageList: number         分页显示的页码数字个数
     //numactive: class         当前页页码的样式(背景颜色)
     <pagination currentPage="0" itemsPerPage="4"
