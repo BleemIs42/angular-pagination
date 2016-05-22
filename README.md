@@ -26,5 +26,5 @@ js:
         //后台返回的数据替换 $scope.musicEmotion
         $scope.musicEmotion = [{}, {}, {}, {}, {}, {}];
         $scope.$broadcast('musicEmotion');
-}]);
+    }]);
 ```
