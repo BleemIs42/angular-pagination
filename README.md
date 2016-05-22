@@ -19,7 +19,8 @@ html:
     //numactive: class         当前页页码的样式(背景颜色)
     <pagination currentPage="0" itemsPerPage="4"
     itemsList="musicEmotion" pageList="2"></pagination>
-
+```
+```javascript
 js:
     app.controller('AppCtrl', ['$scope', function ($scope){
     //后台返回的数据替换 $scope.musicEmotion
