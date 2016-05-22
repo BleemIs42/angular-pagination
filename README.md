@@ -23,8 +23,8 @@ html:
 ```javascript
 js:
     app.controller('AppCtrl', ['$scope', function ($scope){
-    //后台返回的数据替换 $scope.musicEmotion
-    $scope.musicEmotion = [{}, {}, {}, {}, {}, {}];
-    $scope.$broadcast('musicEmotion');
+        //后台返回的数据替换 $scope.musicEmotion
+        $scope.musicEmotion = [{}, {}, {}, {}, {}, {}];
+        $scope.$broadcast('musicEmotion');
 }]);
 ```
